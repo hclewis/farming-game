@@ -22,7 +22,7 @@ carrot_button_image = pygame.image.load("./images/carrot/carrot-button.png").con
 # scale images
 background_scaled = pygame.transform.scale(background, (1200, 900))
 start_small = pygame.transform.scale(start, (200, 100))
-harvest_small = pygame.transform.scale(harvest, (250, 100))
+harvest_small = pygame.transform.scale(harvest, (300, 90))
 empty_field_scaled = pygame.transform.scale(empty_field, (300, 300))
 
 # create crop instances
@@ -30,7 +30,7 @@ carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_fiel
 
 # create button instances
 start_game_button = button.Button(500, 200, start_small, 1)
-harvest_button = button.Button(75, 280, harvest_small, 1)
+harvest_button = button.Button(75, 285, harvest_small, 1)
 carrot_button = button.Button(75, 720, carrot.button, 1)
 
 # seedling lists
@@ -47,13 +47,13 @@ game_timer = 0
 growth_timer = 0
 active_growth = False
 crops_harvested = True
+score = 0
 
 while run:
     screen.blit(background_scaled, (0, 0))
     
     if(page_state == "menu"):
         if start_game_button.draw(screen):
-            growth_timer = 0
             page_state = "fields"
 
     if(page_state == "fields"):
@@ -62,11 +62,16 @@ while run:
         if carrot_button.draw(screen):
             if crops_harvested == True:
                 crops_harvested = False
-            growth_timer = 0
-            active_growth = True
+                growth_timer = 0
+                active_growth = True
 
         if harvest_button.draw(screen):
-            crops_harvested = True
+            if growth_timer == 4:
+                crops_harvested = True
+                active_growth = False
+                growth_timer = 0
+                score += 1
+                print(f"{score}")
 
         if not crops_harvested:
             if active_growth and growth_timer < 4:
