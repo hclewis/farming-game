@@ -1,6 +1,7 @@
 import pygame
 import button
 from crop import Crop
+from field import Field
 
 pygame.init()
 
@@ -29,7 +30,9 @@ carrot_button_image = pygame.image.load("./images/carrot/carrot-button.png").con
 background_scaled = pygame.transform.scale(background, (1200, 900))
 start_small = pygame.transform.scale(start, (200, 100))
 harvest_small = pygame.transform.scale(harvest, (300, 90))
-empty_field_scaled = pygame.transform.scale(empty_field, (300, 300))
+
+# create field instances
+field_1 = Field(empty_field)
 
 # create crop instances
 carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3, carrot_button_image)
@@ -68,7 +71,7 @@ while run:
             page_state = "fields"
 
     if(page_state == "fields"):
-        background_scaled.blit(empty_field_scaled, (75, 400))
+        background_scaled.blit(field_1.empty_field, (75, 400))
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
 
         if carrot_button.draw(screen):
