@@ -16,17 +16,19 @@ seedy_field = pygame.image.load("./images/seedy-field.png").convert_alpha()
 carrot_field_1 = pygame.image.load("./images/carrot/carrot-field-1.png").convert_alpha()
 carrot_field_2 = pygame.image.load("./images/carrot/carrot-field-2.png").convert_alpha()
 carrot_field_3 = pygame.image.load("./images/carrot/carrot-field-3.png").convert_alpha()
+carrot_button_image = pygame.image.load("./images/carrot/carrot-button.png").convert_alpha()
 
 # scale images
 background_scaled = pygame.transform.scale(background, (1200, 900))
 start_small = pygame.transform.scale(start, (200, 100))
 empty_field_scaled = pygame.transform.scale(empty_field, (300, 300))
 
+# create crop instances
+carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3, carrot_button_image)
+
 # create button instances
 start_game_button = button.Button(500, 200, start_small, 1)
-
-# create crop instances
-carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3)
+carrot_button = button.Button(75, 720, carrot.button, 1)
 
 # seedling lists
 carrot_seedling_list = [carrot.seedy_field, carrot.field_1, carrot.field_2, carrot.field_3]
@@ -53,7 +55,9 @@ while run:
         background_scaled.blit(empty_field_scaled, (75, 400))
         if growth_timer < 4:
             background_scaled.blit(carrot_seedling_list[growth_timer], (75, 400))
-    
+        if carrot_button.draw(screen):
+            print("GROWW")
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
