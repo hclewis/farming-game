@@ -8,6 +8,12 @@ SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 900
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+# colours
+text_colour_1 = (255,255,255)
+
+# fonts
+font_1 = pygame.font.SysFont("arialblack", 40)
+
 # loading images
 background = pygame.image.load('./images/background.png')
 start = pygame.image.load("./images/buttons/start-button.png").convert_alpha()
@@ -40,6 +46,11 @@ carrot_seedling_list = [carrot.seedy_field, carrot.field_1, carrot.field_2, carr
 TIMEREVENT = pygame.USEREVENT + 1
 pygame.time.set_timer(TIMEREVENT, 1000) # every 1000 milliseconds = every 1 second
 
+# text
+def draw_text(text, font, text_col, x, y):
+    img = font.render(text, True, text_col)
+    screen.blit(img, (x, y))
+
 # game variables
 page_state = "menu"
 run = True
@@ -58,6 +69,7 @@ while run:
 
     if(page_state == "fields"):
         background_scaled.blit(empty_field_scaled, (75, 400))
+        draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
 
         if carrot_button.draw(screen):
             if crops_harvested == True:
@@ -71,7 +83,6 @@ while run:
                 active_growth = False
                 growth_timer = 0
                 score += 1
-                print(f"{score}")
 
         if not crops_harvested:
             if active_growth and growth_timer < 4:
