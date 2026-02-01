@@ -42,6 +42,7 @@ page_state = "menu"
 run = True
 game_timer = 0
 growth_timer = 0
+active_growth = False
 
 while run:
     screen.blit(background_scaled, (0, 0))
@@ -53,15 +54,21 @@ while run:
 
     if(page_state == "fields"):
         background_scaled.blit(empty_field_scaled, (75, 400))
-        if growth_timer < 4:
-            background_scaled.blit(carrot_seedling_list[growth_timer], (75, 400))
+
         if carrot_button.draw(screen):
-            print("GROWW")
+            growth_timer = 0
+            active_growth = True
+
+        if active_growth == True:
+            if growth_timer < 4 and active_growth == True:
+                background_scaled.blit(carrot_seedling_list[growth_timer], (75, 400))
+            else:
+                active_growth = False
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-        elif event.type == TIMEREVENT:
+        elif event.type == TIMEREVENT and page_state == "fields" and active_growth == True:
             game_timer += 1
             growth_timer += 1
 
