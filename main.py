@@ -43,6 +43,7 @@ run = True
 game_timer = 0
 growth_timer = 0
 active_growth = False
+crops_harvested = True
 
 while run:
     screen.blit(background_scaled, (0, 0))
@@ -56,19 +57,22 @@ while run:
         background_scaled.blit(empty_field_scaled, (75, 400))
 
         if carrot_button.draw(screen):
+            if crops_harvested == True:
+                crops_harvested = False
             growth_timer = 0
             active_growth = True
 
-        if active_growth == True:
-            if growth_timer < 4 and active_growth == True:
+        if not crops_harvested:
+            if active_growth and growth_timer < 4:
                 background_scaled.blit(carrot_seedling_list[growth_timer], (75, 400))
             else:
                 active_growth = False
+                background_scaled.blit(carrot_seedling_list[3], (75, 400))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-        elif event.type == TIMEREVENT and page_state == "fields" and active_growth == True:
+        elif event.type == TIMEREVENT and page_state == "fields" and active_growth:
             game_timer += 1
             growth_timer += 1
 
