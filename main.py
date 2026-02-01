@@ -1,5 +1,6 @@
 import pygame
 import button
+from crop import Crop
 
 pygame.init()
 
@@ -20,16 +21,15 @@ carrot_field_3 = pygame.image.load("./images/carrot/carrot-field-3.png").convert
 background_scaled = pygame.transform.scale(background, (1200, 900))
 start_small = pygame.transform.scale(start, (200, 100))
 empty_field_scaled = pygame.transform.scale(empty_field, (300, 300))
-seedy_field_scaled = pygame.transform.scale(seedy_field, (300, 300))
-carrot_field_1_scaled = pygame.transform.scale(carrot_field_1, (300, 300))
-carrot_field_2_scaled = pygame.transform.scale(carrot_field_2, (300, 300))
-carrot_field_3_scaled = pygame.transform.scale(carrot_field_3, (300, 300))
-
-# seedling lists
-carrot_seedling_list = [seedy_field_scaled, carrot_field_1_scaled, carrot_field_2_scaled, carrot_field_3_scaled]
 
 # create button instances
 start_game_button = button.Button(500, 200, start_small, 1)
+
+# create crop instances
+carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3)
+
+# seedling lists
+carrot_seedling_list = [carrot.seedy_field, carrot.field_1, carrot.field_2, carrot.field_3]
 
 # timers
 TIMEREVENT = pygame.USEREVENT + 1
