@@ -8,3 +8,4 @@ class Crop():
         self.field_2 = pygame.transform.scale(field_2, (300, 300))
         self.field_3 = pygame.transform.scale(field_3, (300, 300))
         self.button = pygame.transform.scale(button, (70,70))
+        self.seedling_list = [self.seedy_field, self.field_1, self.field_2, self.field_3]

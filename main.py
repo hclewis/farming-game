@@ -48,9 +48,6 @@ carrot_button_1 = button.Button(75, 720, carrot.button, 1)
 carrot_button_2 = button.Button(450, 720, carrot.button, 1)
 carrot_button_3 = button.Button(825, 720, carrot.button, 1)
 
-# seedling lists
-carrot_seedling_list = [carrot.seedy_field, carrot.field_1, carrot.field_2, carrot.field_3]
-
 # timers
 TIMEREVENT = pygame.USEREVENT + 1
 pygame.time.set_timer(TIMEREVENT, 1000) # every 1000 milliseconds = every 1 second
@@ -123,24 +120,24 @@ while run:
 # growth stages
         if not field_1.get_crops_harvested():
             if field_1.get_active_growth() and field_1.get_growth_timer() < 4:
-                background_scaled.blit(carrot_seedling_list[field_1.get_growth_timer()], (75, 400))
+                background_scaled.blit(carrot.seedling_list[field_1.get_growth_timer()], (75, 400))
             else:
                 field_1.set_active_growth(False)
-                background_scaled.blit(carrot_seedling_list[3], (75, 400))
+                background_scaled.blit(carrot.seedling_list[3], (75, 400))
 
         if not field_2.get_crops_harvested():
             if field_2.get_active_growth() and field_2.get_growth_timer() < 4:
-                background_scaled.blit(carrot_seedling_list[field_2.get_growth_timer()], (450, 400))
+                background_scaled.blit(carrot.seedling_list[field_2.get_growth_timer()], (450, 400))
             else:
                 field_2.set_active_growth(False)
-                background_scaled.blit(carrot_seedling_list[3], (450, 400))
+                background_scaled.blit(carrot.seedling_list[3], (450, 400))
 
         if not field_3.get_crops_harvested():
             if field_3.get_active_growth() and field_3.get_growth_timer() < 4:
-                background_scaled.blit(carrot_seedling_list[field_3.get_growth_timer()], (825, 400))
+                background_scaled.blit(carrot.seedling_list[field_3.get_growth_timer()], (825, 400))
             else:
                 field_3.set_active_growth(False)
-                background_scaled.blit(carrot_seedling_list[3], (825, 400))
+                background_scaled.blit(carrot.seedling_list[3], (825, 400))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
