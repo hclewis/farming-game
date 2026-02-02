@@ -33,14 +33,20 @@ harvest_small = pygame.transform.scale(harvest, (300, 90))
 
 # create field instances
 field_1 = Field(empty_field)
+field_2 = Field(empty_field)
+field_3 = Field(empty_field)
 
 # create crop instances
 carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3, carrot_button_image)
 
 # create button instances
 start_game_button = button.Button(500, 200, start_small, 1)
-harvest_button = button.Button(75, 285, harvest_small, 1)
-carrot_button = button.Button(75, 720, carrot.button, 1)
+harvest_button_1 = button.Button(75, 285, harvest_small, 1)
+harvest_button_2 = button.Button(450, 285, harvest_small, 1)
+harvest_button_3 = button.Button(825, 285, harvest_small, 1)
+carrot_button_1 = button.Button(75, 720, carrot.button, 1)
+carrot_button_2 = button.Button(450, 720, carrot.button, 1)
+carrot_button_3 = button.Button(825, 720, carrot.button, 1)
 
 # seedling lists
 carrot_seedling_list = [carrot.seedy_field, carrot.field_1, carrot.field_2, carrot.field_3]
@@ -60,7 +66,6 @@ run = True
 game_timer = 0
 growth_timer = 0
 active_growth = False
-crops_harvested = True
 score = 0
 
 while run:
@@ -72,22 +77,30 @@ while run:
 
     if(page_state == "fields"):
         background_scaled.blit(field_1.empty_field, (75, 400))
+        background_scaled.blit(field_2.empty_field, (450, 400))
+        background_scaled.blit(field_3.empty_field, (825, 400))
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
 
-        if carrot_button.draw(screen):
-            if crops_harvested == True:
-                crops_harvested = False
+        if carrot_button_1.draw(screen):
+            if field_1.get_crops_harvested() == True:
+                field_1.set_crops_harvested(False)
                 growth_timer = 0
                 active_growth = True
 
-        if harvest_button.draw(screen):
+        carrot_button_2.draw(screen)
+        carrot_button_3.draw(screen)
+
+        if harvest_button_1.draw(screen):
             if growth_timer == 4:
-                crops_harvested = True
+                field_1.set_crops_harvested(True)
                 active_growth = False
                 growth_timer = 0
                 score += 1
 
-        if not crops_harvested:
+        harvest_button_2.draw(screen)
+        harvest_button_3.draw(screen)
+
+        if not field_1.get_crops_harvested():
             if active_growth and growth_timer < 4:
                 background_scaled.blit(carrot_seedling_list[growth_timer], (75, 400))
             else:
