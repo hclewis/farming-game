@@ -64,8 +64,6 @@ def draw_text(text, font, text_col, x, y):
 page_state = "menu"
 run = True
 game_timer = 0
-growth_timer = 0
-active_growth = False
 score = 0
 
 while run:
@@ -81,38 +79,77 @@ while run:
         background_scaled.blit(field_3.empty_field, (825, 400))
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
 
+# carrot buttons
         if carrot_button_1.draw(screen):
             if field_1.get_crops_harvested() == True:
                 field_1.set_crops_harvested(False)
-                growth_timer = 0
-                active_growth = True
+                field_1.reset_growth_timer()
+                field_1.set_active_growth(True)
 
-        carrot_button_2.draw(screen)
-        carrot_button_3.draw(screen)
+        if carrot_button_2.draw(screen):
+            if field_2.get_crops_harvested() == True:
+                field_2.set_crops_harvested(False)
+                field_2.reset_growth_timer()
+                field_2.set_active_growth(True)
 
+        if carrot_button_3.draw(screen):
+            if field_3.get_crops_harvested() == True:
+                field_3.set_crops_harvested(False)
+                field_3.reset_growth_timer()
+                field_3.set_active_growth(True)
+
+# harvest buttons
         if harvest_button_1.draw(screen):
-            if growth_timer == 4:
+            if field_1.get_growth_timer() >= 4:
                 field_1.set_crops_harvested(True)
-                active_growth = False
-                growth_timer = 0
+                field_1.set_active_growth(False)
+                field_1.reset_growth_timer()
                 score += 1
 
-        harvest_button_2.draw(screen)
-        harvest_button_3.draw(screen)
+        if harvest_button_2.draw(screen):
+            if field_2.get_growth_timer() >= 4:
+                field_2.set_crops_harvested(True)
+                field_2.set_active_growth(False)
+                field_2.reset_growth_timer()
+                score += 1
 
+        if harvest_button_3.draw(screen):
+            if field_3.get_growth_timer() >= 4:
+                field_3.set_crops_harvested(True)
+                field_3.set_active_growth(False)
+                field_3.reset_growth_timer()
+                score += 1
+
+# growth stages
         if not field_1.get_crops_harvested():
-            if active_growth and growth_timer < 4:
-                background_scaled.blit(carrot_seedling_list[growth_timer], (75, 400))
+            if field_1.get_active_growth() and field_1.get_growth_timer() < 4:
+                background_scaled.blit(carrot_seedling_list[field_1.get_growth_timer()], (75, 400))
             else:
-                active_growth = False
+                field_1.set_active_growth(False)
                 background_scaled.blit(carrot_seedling_list[3], (75, 400))
+
+        if not field_2.get_crops_harvested():
+            if field_2.get_active_growth() and field_2.get_growth_timer() < 4:
+                background_scaled.blit(carrot_seedling_list[field_2.get_growth_timer()], (450, 400))
+            else:
+                field_2.set_active_growth(False)
+                background_scaled.blit(carrot_seedling_list[3], (450, 400))
+
+        if not field_3.get_crops_harvested():
+            if field_3.get_active_growth() and field_3.get_growth_timer() < 4:
+                background_scaled.blit(carrot_seedling_list[field_3.get_growth_timer()], (825, 400))
+            else:
+                field_3.set_active_growth(False)
+                background_scaled.blit(carrot_seedling_list[3], (825, 400))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-        elif event.type == TIMEREVENT and page_state == "fields" and active_growth:
+        elif event.type == TIMEREVENT and page_state == "fields":
             game_timer += 1
-            growth_timer += 1
+            field_1.increment_growth_timer()
+            field_2.increment_growth_timer()
+            field_3.increment_growth_timer()
 
     pygame.display.update()
 
