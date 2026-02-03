@@ -6,6 +6,7 @@ class Field():
         self.crops_harvested = True
         self.growth_timer = 0
         self.active_growth = False
+        self.current_crop = ""
 
     def set_crops_harvested(self, bool):
         self.crops_harvested = bool
@@ -27,3 +28,9 @@ class Field():
 
     def get_active_growth(self):
         return self.active_growth
+    
+    def set_current_crop(self):
+        self.current_crop = ""
+
+    def get_current_crop(self):
+        return self.current_crop
