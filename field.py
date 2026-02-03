@@ -51,3 +51,9 @@ class Field():
         self.reset_growth_timer()
         self.set_active_growth(True)
         self.set_current_crop(vegetable)
+
+    def harvest_crop(self):
+        self.set_crops_harvested(True)
+        self.set_active_growth(False)
+        self.reset_growth_timer()
+        self.increment_current_crop()

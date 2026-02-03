@@ -123,24 +123,15 @@ while run:
 # harvest buttons
         if harvest_button_1.draw(screen):
             if field_1.get_growth_timer() >= 4:
-                field_1.set_crops_harvested(True)
-                field_1.set_active_growth(False)
-                field_1.reset_growth_timer()
-                field_1.increment_current_crop()
+                field_1.harvest_crop()
 
         if harvest_button_2.draw(screen):
             if field_2.get_growth_timer() >= 4:
-                field_2.set_crops_harvested(True)
-                field_2.set_active_growth(False)
-                field_2.reset_growth_timer()
-                field_2.increment_current_crop()
+                field_2.harvest_crop()
 
         if harvest_button_3.draw(screen):
             if field_3.get_growth_timer() >= 4:
-                field_3.set_crops_harvested(True)
-                field_3.set_active_growth(False)
-                field_3.reset_growth_timer()
-                field_3.increment_current_crop()
+                field_3.harvest_crop()
 
 # growth stages
         if not field_1.get_crops_harvested():
