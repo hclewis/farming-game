@@ -107,12 +107,14 @@ while run:
                 field_2.set_crops_harvested(False)
                 field_2.reset_growth_timer()
                 field_2.set_active_growth(True)
+                field_2.set_current_crop("carrot")
 
         if carrot_button_3.draw(screen):
             if field_3.get_crops_harvested() == True:
                 field_3.set_crops_harvested(False)
                 field_3.reset_growth_timer()
                 field_3.set_active_growth(True)
+                field_3.set_current_crop("carrot")
 
 # beet buttons
         if beet_button_1.draw(screen):
@@ -127,12 +129,14 @@ while run:
                 field_2.set_crops_harvested(False)
                 field_2.reset_growth_timer()
                 field_2.set_active_growth(True)
+                field_2.set_current_crop("beet")
 
         if beet_button_3.draw(screen):
             if field_3.get_crops_harvested() == True:
                 field_3.set_crops_harvested(False)
                 field_3.reset_growth_timer()
                 field_3.set_active_growth(True)
+                field_3.set_current_crop("beet")
 
 # harvest buttons
         if harvest_button_1.draw(screen):
@@ -166,17 +170,17 @@ while run:
 
         if not field_2.get_crops_harvested():
             if field_2.get_active_growth() and field_2.get_growth_timer() < 4:
-                background_scaled.blit(carrot.seedling_list[field_2.get_growth_timer()], (450, 400))
+                background_scaled.blit(field_2.get_crop_img_list()[field_2.get_growth_timer()], (450, 400))
             else:
                 field_2.set_active_growth(False)
-                background_scaled.blit(carrot.seedling_list[3], (450, 400))
+                background_scaled.blit(field_2.get_crop_img_list()[3], (450, 400))
 
         if not field_3.get_crops_harvested():
             if field_3.get_active_growth() and field_3.get_growth_timer() < 4:
-                background_scaled.blit(carrot.seedling_list[field_3.get_growth_timer()], (825, 400))
+                background_scaled.blit(field_3.get_crop_img_list()[field_3.get_growth_timer()], (825, 400))
             else:
                 field_3.set_active_growth(False)
-                background_scaled.blit(carrot.seedling_list[3], (825, 400))
+                background_scaled.blit(field_3.get_crop_img_list()[3], (825, 400))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
