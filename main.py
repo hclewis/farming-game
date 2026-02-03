@@ -38,7 +38,7 @@ field_2 = Field(empty_field)
 field_3 = Field(empty_field)
 
 # create crop instances
-carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3, carrot_button_image, carrot_icon_image)
+carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3, carrot_button_image, carrot_icon_image, 30, 70)
 
 # create button instances
 start_game_button = button.Button(500, 200, start_small, 1)
@@ -75,7 +75,7 @@ while run:
         background_scaled.blit(field_1.empty_field, (75, 400))
         background_scaled.blit(field_2.empty_field, (450, 400))
         background_scaled.blit(field_3.empty_field, (825, 400))
-        background_scaled.blit(carrot.icon, (75, 800))
+        background_scaled.blit(carrot.icon, (75, 808))
         draw_text(f"{carrot.get_crop_amount()}", font_1, text_colour_1, 150, 820)
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
 
