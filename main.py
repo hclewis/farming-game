@@ -144,21 +144,21 @@ while run:
                 field_1.set_crops_harvested(True)
                 field_1.set_active_growth(False)
                 field_1.reset_growth_timer()
-                carrot.increment_crop_amount()
+                field_1.increment_current_crop()
 
         if harvest_button_2.draw(screen):
             if field_2.get_growth_timer() >= 4:
                 field_2.set_crops_harvested(True)
                 field_2.set_active_growth(False)
                 field_2.reset_growth_timer()
-                carrot.increment_crop_amount()
+                field_2.increment_current_crop()
 
         if harvest_button_3.draw(screen):
             if field_3.get_growth_timer() >= 4:
                 field_3.set_crops_harvested(True)
                 field_3.set_active_growth(False)
                 field_3.reset_growth_timer()
-                carrot.increment_crop_amount()
+                field_3.increment_current_crop()
 
 # growth stages
         if not field_1.get_crops_harvested():

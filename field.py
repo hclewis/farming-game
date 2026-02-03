@@ -40,3 +40,8 @@ class Field():
         for vegetable in self.vegetables:
             if vegetable.name == self.current_crop:
                 return vegetable.seedling_list
+            
+    def increment_current_crop(self):
+        for vegetable in self.vegetables:
+            if vegetable.name == self.current_crop:
+                vegetable.increment_crop_amount()
