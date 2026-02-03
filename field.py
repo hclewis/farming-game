@@ -45,3 +45,9 @@ class Field():
         for vegetable in self.vegetables:
             if vegetable.name == self.current_crop:
                 vegetable.increment_crop_amount()
+
+    def grow_crop(self, vegetable):
+        self.set_crops_harvested(False)
+        self.reset_growth_timer()
+        self.set_active_growth(True)
+        self.set_current_crop(vegetable)

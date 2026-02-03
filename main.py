@@ -97,46 +97,28 @@ while run:
 # carrot buttons
         if carrot_button_1.draw(screen):
             if field_1.get_crops_harvested() == True:
-                field_1.set_crops_harvested(False)
-                field_1.reset_growth_timer()
-                field_1.set_active_growth(True)
-                field_1.set_current_crop("carrot")
+                field_1.grow_crop("carrot")
 
         if carrot_button_2.draw(screen):
             if field_2.get_crops_harvested() == True:
-                field_2.set_crops_harvested(False)
-                field_2.reset_growth_timer()
-                field_2.set_active_growth(True)
-                field_2.set_current_crop("carrot")
+                field_2.grow_crop("carrot")
 
         if carrot_button_3.draw(screen):
             if field_3.get_crops_harvested() == True:
-                field_3.set_crops_harvested(False)
-                field_3.reset_growth_timer()
-                field_3.set_active_growth(True)
-                field_3.set_current_crop("carrot")
+                field_3.grow_crop("carrot")
 
 # beet buttons
         if beet_button_1.draw(screen):
             if field_1.get_crops_harvested() == True:
-                field_1.set_crops_harvested(False)
-                field_1.reset_growth_timer()
-                field_1.set_active_growth(True)
-                field_1.set_current_crop("beet")
+                field_1.grow_crop("beet")
 
         if beet_button_2.draw(screen):
             if field_2.get_crops_harvested() == True:
-                field_2.set_crops_harvested(False)
-                field_2.reset_growth_timer()
-                field_2.set_active_growth(True)
-                field_2.set_current_crop("beet")
+                field_2.grow_crop("beet")
 
         if beet_button_3.draw(screen):
             if field_3.get_crops_harvested() == True:
-                field_3.set_crops_harvested(False)
-                field_3.reset_growth_timer()
-                field_3.set_active_growth(True)
-                field_3.set_current_crop("beet")
+                field_3.grow_crop("beet")
 
 # harvest buttons
         if harvest_button_1.draw(screen):
