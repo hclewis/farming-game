@@ -1,12 +1,13 @@
 import pygame
 
 class Field():
-    def __init__(self, empty_field):
+    def __init__(self, empty_field, vegetables):
         self.empty_field = pygame.transform.scale(empty_field, (300, 300))
         self.crops_harvested = True
         self.growth_timer = 0
         self.active_growth = False
         self.current_crop = ""
+        self.vegetables = vegetables
 
     def set_crops_harvested(self, bool):
         self.crops_harvested = bool
@@ -29,8 +30,13 @@ class Field():
     def get_active_growth(self):
         return self.active_growth
     
-    def set_current_crop(self):
-        self.current_crop = ""
+    def set_current_crop(self, crop):
+        self.current_crop = crop
 
     def get_current_crop(self):
         return self.current_crop
+    
+    def get_crop_img_list(self):
+        for vegetable in self.vegetables:
+            if vegetable.name == self.current_crop:
+                return vegetable.seedling_list
