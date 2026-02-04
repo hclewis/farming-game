@@ -33,6 +33,18 @@ beet_field_2 = pygame.image.load("./images/beet/beet-field-2.png").convert_alpha
 beet_field_3 = pygame.image.load("./images/beet/beet-field-3.png").convert_alpha()
 beet_button_image = pygame.image.load("./images/beet/beet-button.png").convert_alpha()
 beet_icon_image = pygame.image.load("./images/beet/beet-icon.png").convert_alpha()
+# cauliflowers
+cauli_field_1 = pygame.image.load("./images/cauli/cauli-field-1.png").convert_alpha()
+cauli_field_2 = pygame.image.load("./images/cauli/cauli-field-2.png").convert_alpha()
+cauli_field_3 = pygame.image.load("./images/cauli/cauli-field-3.png").convert_alpha()
+cauli_button_image = pygame.image.load("./images/cauli/cauli-button.png").convert_alpha()
+cauli_icon_image = pygame.image.load("./images/cauli/cauli-icon.png").convert_alpha()
+# onions
+onion_field_1 = pygame.image.load("./images/onion/onion-field-1.png").convert_alpha()
+onion_field_2 = pygame.image.load("./images/onion/onion-field-2.png").convert_alpha()
+onion_field_3 = pygame.image.load("./images/onion/onion-field-3.png").convert_alpha()
+onion_button_image = pygame.image.load("./images/onion/onion-button.png").convert_alpha()
+onion_icon_image = pygame.image.load("./images/onion/onion-icon.png").convert_alpha()
 
 # scale images
 background_scaled = pygame.transform.scale(background, (1200, 900))
@@ -42,6 +54,8 @@ harvest_small = pygame.transform.scale(harvest, (300, 90))
 # create crop instances
 carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3, carrot_button_image, carrot_icon_image, 20, 70)
 beet = Crop("beet", seedy_field, beet_field_1, beet_field_2, beet_field_3, beet_button_image, beet_icon_image, 40, 70)
+cauli = Crop("cauli", seedy_field, cauli_field_1, cauli_field_2, cauli_field_3, cauli_button_image, cauli_icon_image, 60, 45)
+onion = Crop("onion", seedy_field, onion_field_1, onion_field_2, onion_field_3, onion_button_image, onion_icon_image, 30, 70)
 
 # create button instances
 start_game_button = button.Button(500, 200, start_small, 1)
@@ -54,6 +68,12 @@ carrot_button_3 = button.Button(825, 720, carrot.button, 1)
 beet_button_1 = button.Button(150, 720, beet.button, 1)
 beet_button_2 = button.Button(525, 720, beet.button, 1)
 beet_button_3 = button.Button(900, 720, beet.button, 1)
+cauli_button_1 = button.Button(225, 720, cauli.button, 1)
+cauli_button_2 = button.Button(600, 720, cauli.button, 1)
+cauli_button_3 = button.Button(975, 720, cauli.button, 1)
+onion_button_1 = button.Button(300, 720, onion.button, 1)
+onion_button_2 = button.Button(675, 720, onion.button, 1)
+onion_button_3 = button.Button(1050, 720, onion.button, 1)
 
 # timers
 TIMEREVENT = pygame.USEREVENT + 1
@@ -71,9 +91,9 @@ game_timer = 0
 score = 0
 
 # create field instances
-field_1 = Field(empty_field, [carrot, beet])
-field_2 = Field(empty_field, [carrot, beet])
-field_3 = Field(empty_field, [carrot, beet])
+field_1 = Field(empty_field, [carrot, beet, cauli, onion])
+field_2 = Field(empty_field, [carrot, beet, cauli, onion])
+field_3 = Field(empty_field, [carrot, beet, cauli, onion])
 
 while run:
     screen.blit(background_scaled, (0, 0))
@@ -86,23 +106,25 @@ while run:
         background_scaled.blit(field_1.empty_field, (75, 400))
         background_scaled.blit(field_2.empty_field, (450, 400))
         background_scaled.blit(field_3.empty_field, (825, 400))
+
         background_scaled.blit(carrot.icon, (75, 808))
         draw_text(f"{carrot.get_crop_amount()}", font_1, text_colour_1, 150, 820)
-        background_scaled.blit(beet.icon, (450, 808))
-        draw_text(f"{beet.get_crop_amount()}", font_1, text_colour_1, 525, 820)
-        draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
+        background_scaled.blit(beet.icon, (325, 808))
+        draw_text(f"{beet.get_crop_amount()}", font_1, text_colour_1, 400, 820)
+        background_scaled.blit(cauli.icon, (575, 808))
+        draw_text(f"{cauli.get_crop_amount()}", font_1, text_colour_1, 650, 820)
+        background_scaled.blit(onion.icon, (825, 808))
+        draw_text(f"{onion.get_crop_amount()}", font_1, text_colour_1, 900, 820)
 
-        field_1.get_crop_img_list()
+        draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
 
 # carrot buttons
         if carrot_button_1.draw(screen):
             if field_1.get_crops_harvested() == True:
                 field_1.grow_crop("carrot")
-
         if carrot_button_2.draw(screen):
             if field_2.get_crops_harvested() == True:
                 field_2.grow_crop("carrot")
-
         if carrot_button_3.draw(screen):
             if field_3.get_crops_harvested() == True:
                 field_3.grow_crop("carrot")
@@ -111,14 +133,34 @@ while run:
         if beet_button_1.draw(screen):
             if field_1.get_crops_harvested() == True:
                 field_1.grow_crop("beet")
-
         if beet_button_2.draw(screen):
             if field_2.get_crops_harvested() == True:
                 field_2.grow_crop("beet")
-
         if beet_button_3.draw(screen):
             if field_3.get_crops_harvested() == True:
                 field_3.grow_crop("beet")
+
+# cauli buttons
+        if cauli_button_1.draw(screen):
+            if field_1.get_crops_harvested() == True:
+                field_1.grow_crop("cauli")
+        if cauli_button_2.draw(screen):
+            if field_2.get_crops_harvested() == True:
+                field_2.grow_crop("cauli")
+        if cauli_button_3.draw(screen):
+            if field_3.get_crops_harvested() == True:
+                field_3.grow_crop("cauli")
+
+# onion buttons
+        if onion_button_1.draw(screen):
+            if field_1.get_crops_harvested() == True:
+                field_1.grow_crop("onion")
+        if onion_button_2.draw(screen):
+            if field_2.get_crops_harvested() == True:
+                field_2.grow_crop("onion")
+        if onion_button_3.draw(screen):
+            if field_3.get_crops_harvested() == True:
+                field_3.grow_crop("onion")
 
 # harvest buttons
         if harvest_button_1.draw(screen):
