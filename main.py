@@ -120,7 +120,7 @@ while run:
         draw_text(f"{onion.get_crop_amount()}", font_1, text_colour_1, 900, 820)
 
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
-        draw_text(f"{quest}", font_1, text_colour_1, 300, 50)
+        draw_text(f"{quest["title"]}", font_1, text_colour_1, 300, 50)
 
 # carrot buttons
         if carrot_button_1.draw(screen):
