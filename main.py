@@ -2,6 +2,7 @@ import pygame
 import button
 from crop import Crop
 from field import Field
+from challenge import gen_challenge
 
 pygame.init()
 
@@ -65,15 +66,15 @@ harvest_button_3 = button.Button(825, 285, harvest_small, 1)
 carrot_button_1 = button.Button(75, 720, carrot.button, 1)
 carrot_button_2 = button.Button(450, 720, carrot.button, 1)
 carrot_button_3 = button.Button(825, 720, carrot.button, 1)
-beet_button_1 = button.Button(150, 720, beet.button, 1)
-beet_button_2 = button.Button(525, 720, beet.button, 1)
-beet_button_3 = button.Button(900, 720, beet.button, 1)
-cauli_button_1 = button.Button(225, 720, cauli.button, 1)
-cauli_button_2 = button.Button(600, 720, cauli.button, 1)
-cauli_button_3 = button.Button(975, 720, cauli.button, 1)
-onion_button_1 = button.Button(300, 720, onion.button, 1)
-onion_button_2 = button.Button(675, 720, onion.button, 1)
-onion_button_3 = button.Button(1050, 720, onion.button, 1)
+beet_button_1 = button.Button(152, 720, beet.button, 1)
+beet_button_2 = button.Button(526, 720, beet.button, 1)
+beet_button_3 = button.Button(901, 720, beet.button, 1)
+cauli_button_1 = button.Button(229, 720, cauli.button, 1)
+cauli_button_2 = button.Button(603, 720, cauli.button, 1)
+cauli_button_3 = button.Button(978, 720, cauli.button, 1)
+onion_button_1 = button.Button(305, 720, onion.button, 1)
+onion_button_2 = button.Button(680, 720, onion.button, 1)
+onion_button_3 = button.Button(1055, 720, onion.button, 1)
 
 # timers
 TIMEREVENT = pygame.USEREVENT + 1
@@ -89,6 +90,8 @@ page_state = "menu"
 run = True
 game_timer = 0
 score = 0
+vegetables = ["carrot", "beet", "cauli", "onion"]
+quest = gen_challenge(vegetables)
 
 # create field instances
 field_1 = Field(empty_field, [carrot, beet, cauli, onion])
@@ -117,6 +120,7 @@ while run:
         draw_text(f"{onion.get_crop_amount()}", font_1, text_colour_1, 900, 820)
 
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
+        draw_text(f"{quest}", font_1, text_colour_1, 300, 50)
 
 # carrot buttons
         if carrot_button_1.draw(screen):
