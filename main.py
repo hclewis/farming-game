@@ -111,18 +111,22 @@ while run:
         if start_game_button.draw(screen):
             page_state = "fields"
 
-    if(page_state == "fields"):
-        background_scaled.blit(field_1.empty_field, (75, 400))
-        background_scaled.blit(field_2.empty_field, (450, 400))
-        background_scaled.blit(field_3.empty_field, (825, 400))
+    if page_state == "end":
+        screen.blit(background_scaled, (0, 0))
+        draw_text("end game", font_1, text_colour_1, 75, 50)
 
-        background_scaled.blit(carrot.icon, (75, 808))
+    if(page_state == "fields"):
+        screen.blit(field_1.empty_field, (75, 400))
+        screen.blit(field_2.empty_field, (450, 400))
+        screen.blit(field_3.empty_field, (825, 400))
+
+        screen.blit(carrot.icon, (75, 808))
         draw_text(f"{carrot.get_crop_amount()}", font_1, text_colour_1, 150, 820)
-        background_scaled.blit(beet.icon, (325, 808))
+        screen.blit(beet.icon, (325, 808))
         draw_text(f"{beet.get_crop_amount()}", font_1, text_colour_1, 400, 820)
-        background_scaled.blit(cauli.icon, (575, 808))
+        screen.blit(cauli.icon, (575, 808))
         draw_text(f"{cauli.get_crop_amount()}", font_1, text_colour_1, 650, 820)
-        background_scaled.blit(onion.icon, (825, 808))
+        screen.blit(onion.icon, (825, 808))
         draw_text(f"{onion.get_crop_amount()}", font_1, text_colour_1, 900, 820)
 
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
@@ -197,24 +201,27 @@ while run:
 # growth stages
         if not field_1.get_crops_harvested():
             if field_1.get_active_growth() and field_1.get_growth_timer() < 4:
-                background_scaled.blit(field_1.get_crop_img_list()[field_1.get_growth_timer()], (75, 400))
+                screen.blit(field_1.get_crop_img_list()[field_1.get_growth_timer()], (75, 400))
             else:
                 field_1.set_active_growth(False)
-                background_scaled.blit(field_1.get_crop_img_list()[3], (75, 400))
+                screen.blit(field_1.get_crop_img_list()[3], (75, 400))
 
         if not field_2.get_crops_harvested():
             if field_2.get_active_growth() and field_2.get_growth_timer() < 4:
-                background_scaled.blit(field_2.get_crop_img_list()[field_2.get_growth_timer()], (450, 400))
+                screen.blit(field_2.get_crop_img_list()[field_2.get_growth_timer()], (450, 400))
             else:
                 field_2.set_active_growth(False)
-                background_scaled.blit(field_2.get_crop_img_list()[3], (450, 400))
+                screen.blit(field_2.get_crop_img_list()[3], (450, 400))
 
         if not field_3.get_crops_harvested():
             if field_3.get_active_growth() and field_3.get_growth_timer() < 4:
-                background_scaled.blit(field_3.get_crop_img_list()[field_3.get_growth_timer()], (825, 400))
+                screen.blit(field_3.get_crop_img_list()[field_3.get_growth_timer()], (825, 400))
             else:
                 field_3.set_active_growth(False)
-                background_scaled.blit(field_3.get_crop_img_list()[3], (825, 400))
+                screen.blit(field_3.get_crop_img_list()[3], (825, 400))
+
+        if score > 10:
+            page_state = "end"
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
