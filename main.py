@@ -2,7 +2,7 @@ import pygame
 import button
 from crop import Crop
 from field import Field
-from challenge import gen_challenge
+from challenge import Challenge
 
 pygame.init()
 
@@ -16,6 +16,13 @@ text_colour_1 = (255,255,255)
 
 # fonts
 font_1 = pygame.font.SysFont("arialblack", 40)
+
+# game variables
+page_state = "menu"
+run = True
+game_timer = 0
+score = 0
+vegetables = ["carrot", "beet", "cauli", "onion"]
 
 # loading images
 background = pygame.image.load('./images/background.png')
@@ -77,6 +84,9 @@ onion_button_1 = button.Button(305, 720, onion.button, 1)
 onion_button_2 = button.Button(680, 720, onion.button, 1)
 onion_button_3 = button.Button(1055, 720, onion.button, 1)
 
+# create more instances
+quest = Challenge(vegetables)
+
 # timers
 TIMEREVENT = pygame.USEREVENT + 1
 pygame.time.set_timer(TIMEREVENT, 1000) # every 1000 milliseconds = every 1 second
@@ -86,19 +96,15 @@ def draw_text(text, font, text_col, x, y):
     img = font.render(text, True, text_col)
     screen.blit(img, (x, y))
 
-# game variables
-page_state = "menu"
-run = True
-game_timer = 0
-score = 0
-vegetables = ["carrot", "beet", "cauli", "onion"]
-quest = gen_challenge(vegetables)
-
 # create field instances
 field_1 = Field(empty_field, [carrot, beet, cauli, onion])
 field_2 = Field(empty_field, [carrot, beet, cauli, onion])
 field_3 = Field(empty_field, [carrot, beet, cauli, onion])
 
+# more variables
+quest.gen_challenge()
+
+#
 while run:
     screen.blit(background_scaled, (0, 0))
     
@@ -121,7 +127,7 @@ while run:
         draw_text(f"{onion.get_crop_amount()}", font_1, text_colour_1, 900, 820)
 
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
-        draw_text(f"{quest["title"]}", font_1, text_colour_1, 300, 50)
+        draw_text(f"{quest.title}", font_1, text_colour_1, 300, 50)
 
 # carrot buttons
         if carrot_button_1.draw(screen):
