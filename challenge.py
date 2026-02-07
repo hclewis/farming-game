@@ -31,7 +31,7 @@ class Challenge():
         index = 0
         challenge_complete = self.vegetables[index].compare_crop_amount()
         index += 1
-        while challenge_complete and index < 4:
+        while challenge_complete and index < len(vegetables):
             challenge_complete = self.vegetables[index].compare_crop_amount()
             index += 1
 
