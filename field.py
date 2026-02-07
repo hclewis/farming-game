@@ -16,7 +16,10 @@ class Field():
         return self.crops_harvested
     
     def increment_growth_timer(self):
-        self.growth_timer += 1
+
+        for vegetable in self.vegetables:
+            if vegetable.name == self.current_crop:
+                self.growth_timer += vegetable.rate
 
     def reset_growth_timer(self):
         self.growth_timer = 0

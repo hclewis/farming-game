@@ -20,7 +20,7 @@ font_1 = pygame.font.SysFont("arialblack", 40)
 # game variables
 page_state = "menu"
 run = True
-game_timer = 0
+game_timer = 60
 score = 0
 
 # loading images
@@ -60,10 +60,10 @@ start_small = pygame.transform.scale(start, (200, 100))
 harvest_small = pygame.transform.scale(harvest, (300, 90))
 
 # create crop instances
-carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3, carrot_button_image, carrot_icon_image, 20, 70, 3)
-beet = Crop("beet", seedy_field, beet_field_1, beet_field_2, beet_field_3, beet_button_image, beet_icon_image, 40, 70, 5)
-cauli = Crop("cauli", seedy_field, cauli_field_1, cauli_field_2, cauli_field_3, cauli_button_image, cauli_icon_image, 60, 45, 6)
-onion = Crop("onion", seedy_field, onion_field_1, onion_field_2, onion_field_3, onion_button_image, onion_icon_image, 30, 70, 4)
+carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3, carrot_button_image, carrot_icon_image, 20, 70, 3, 1)
+beet = Crop("beet", seedy_field, beet_field_1, beet_field_2, beet_field_3, beet_button_image, beet_icon_image, 40, 70, 5, 0.6)
+cauli = Crop("cauli", seedy_field, cauli_field_1, cauli_field_2, cauli_field_3, cauli_button_image, cauli_icon_image, 60, 45, 6, 0.4)
+onion = Crop("onion", seedy_field, onion_field_1, onion_field_2, onion_field_3, onion_button_image, onion_icon_image, 30, 70, 4, 0.8)
 
 # create button instances
 start_game_button = button.Button(500, 200, start_small, 1)
@@ -109,6 +109,7 @@ while run:
     
     if(page_state == "menu"):
         if start_game_button.draw(screen):
+            #
             page_state = "fields"
 
     if page_state == "end":
@@ -131,6 +132,8 @@ while run:
 
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
         draw_text(f"{quest.title}", font_1, text_colour_1, 400, 50)
+        draw_text(f"{game_timer}", font_1, text_colour_1, 1000, 50)
+
 
 # carrot buttons
         if carrot_button_1.draw(screen):
@@ -201,33 +204,33 @@ while run:
 # growth stages
         if not field_1.get_crops_harvested():
             if field_1.get_active_growth() and field_1.get_growth_timer() < 4:
-                screen.blit(field_1.get_crop_img_list()[field_1.get_growth_timer()], (75, 400))
+                screen.blit(field_1.get_crop_img_list()[int(field_1.get_growth_timer())], (75, 400))
             else:
                 field_1.set_active_growth(False)
                 screen.blit(field_1.get_crop_img_list()[3], (75, 400))
 
         if not field_2.get_crops_harvested():
             if field_2.get_active_growth() and field_2.get_growth_timer() < 4:
-                screen.blit(field_2.get_crop_img_list()[field_2.get_growth_timer()], (450, 400))
+                screen.blit(field_2.get_crop_img_list()[int(field_2.get_growth_timer())], (450, 400))
             else:
                 field_2.set_active_growth(False)
                 screen.blit(field_2.get_crop_img_list()[3], (450, 400))
 
         if not field_3.get_crops_harvested():
             if field_3.get_active_growth() and field_3.get_growth_timer() < 4:
-                screen.blit(field_3.get_crop_img_list()[field_3.get_growth_timer()], (825, 400))
+                screen.blit(field_3.get_crop_img_list()[int(field_3.get_growth_timer())], (825, 400))
             else:
                 field_3.set_active_growth(False)
                 screen.blit(field_3.get_crop_img_list()[3], (825, 400))
 
-        if score > 10:
+        if game_timer == 0:
             page_state = "end"
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
         elif event.type == TIMEREVENT and page_state == "fields":
-            game_timer += 1
+            game_timer -= 1
             field_1.increment_growth_timer()
             field_2.increment_growth_timer()
             field_3.increment_growth_timer()

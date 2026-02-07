@@ -1,7 +1,7 @@
 import pygame
 
 class Crop():
-    def __init__(self, name, seedy_field, field_1, field_2, field_3, button, icon, icon_width, icon_height, value):
+    def __init__(self, name, seedy_field, field_1, field_2, field_3, button, icon, icon_width, icon_height, value, rate):
         self.name = name
         self.crop_amount = 0
         self.crop_amount_required = 0
@@ -13,6 +13,7 @@ class Crop():
         self.icon = pygame.transform.scale(icon, (icon_width,icon_height))
         self.seedling_list = [self.seedy_field, self.field_1, self.field_2, self.field_3]
         self.value = value
+        self.rate = rate
 
     def increment_crop_amount(self):
         self.crop_amount += 1
