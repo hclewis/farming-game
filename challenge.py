@@ -3,14 +3,16 @@ import random
 vegetables = ["carrot", "beet", "cauli", "onion"]
 
 class Challenge():
+
     def __init__(self, vegetables):
         self.vegetables = vegetables
         self.title = ""
+        self.current_score = 0
     
     def gen_challenge(self):
         ran0 = random.randint(1,2)
         if ran0 == 1:
-            ran1 = random.randint(6,10)
+            ran1 = random.randint(6,9)
             veg1 = self.vegetables[random.randint(0,3)]
             veg1.set_crop_amount_required(ran1)
             self.title = f"Gather {ran1} {veg1.name}s"
@@ -38,7 +40,9 @@ class Challenge():
         if challenge_complete:
             for vegetable in self.vegetables:
                 vegetable.reduce_crop_amount()
-        
+                self.current_score = self.current_score + vegetable.get_crop_score()
+                vegetable.reset_crop_amount()
             self.gen_challenge()
-
-        return challenge_complete
+    
+    def reset_current_score(self):
+        self.current_score = 0

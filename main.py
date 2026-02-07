@@ -60,10 +60,10 @@ start_small = pygame.transform.scale(start, (200, 100))
 harvest_small = pygame.transform.scale(harvest, (300, 90))
 
 # create crop instances
-carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3, carrot_button_image, carrot_icon_image, 20, 70)
-beet = Crop("beet", seedy_field, beet_field_1, beet_field_2, beet_field_3, beet_button_image, beet_icon_image, 40, 70)
-cauli = Crop("cauli", seedy_field, cauli_field_1, cauli_field_2, cauli_field_3, cauli_button_image, cauli_icon_image, 60, 45)
-onion = Crop("onion", seedy_field, onion_field_1, onion_field_2, onion_field_3, onion_button_image, onion_icon_image, 30, 70)
+carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3, carrot_button_image, carrot_icon_image, 20, 70, 3)
+beet = Crop("beet", seedy_field, beet_field_1, beet_field_2, beet_field_3, beet_button_image, beet_icon_image, 40, 70, 5)
+cauli = Crop("cauli", seedy_field, cauli_field_1, cauli_field_2, cauli_field_3, cauli_button_image, cauli_icon_image, 60, 45, 6)
+onion = Crop("onion", seedy_field, onion_field_1, onion_field_2, onion_field_3, onion_button_image, onion_icon_image, 30, 70, 4)
 
 # create button instances
 start_game_button = button.Button(500, 200, start_small, 1)
@@ -126,7 +126,7 @@ while run:
         draw_text(f"{onion.get_crop_amount()}", font_1, text_colour_1, 900, 820)
 
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
-        draw_text(f"{quest.title}", font_1, text_colour_1, 300, 50)
+        draw_text(f"{quest.title}", font_1, text_colour_1, 400, 50)
 
 # carrot buttons
         if carrot_button_1.draw(screen):
@@ -176,14 +176,23 @@ while run:
         if harvest_button_1.draw(screen):
             if field_1.get_growth_timer() >= 4:
                 field_1.harvest_crop()
+                quest.check_challenge_status()
+                score = score + quest.current_score
+                quest.reset_current_score()
 
         if harvest_button_2.draw(screen):
             if field_2.get_growth_timer() >= 4:
                 field_2.harvest_crop()
+                quest.check_challenge_status()
+                score = score + quest.current_score
+                quest.reset_current_score()
 
         if harvest_button_3.draw(screen):
             if field_3.get_growth_timer() >= 4:
                 field_3.harvest_crop()
+                quest.check_challenge_status()
+                score = score + quest.current_score
+                quest.reset_current_score()
 
 # growth stages
         if not field_1.get_crops_harvested():
