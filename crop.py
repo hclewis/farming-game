@@ -4,6 +4,7 @@ class Crop():
     def __init__(self, name, seedy_field, field_1, field_2, field_3, button, icon, x, y):
         self.name = name
         self.crop_amount = 0
+        self.crop_amount_required = 0
         self.seedy_field = pygame.transform.scale(seedy_field, (300,300))
         self.field_1 = pygame.transform.scale(field_1, (300,300))
         self.field_2 = pygame.transform.scale(field_2, (300,300))
@@ -17,3 +18,15 @@ class Crop():
 
     def get_crop_amount(self):
         return self.crop_amount
+    
+    def set_crop_amount_required(self, veg_num):
+        self.crop_amount_required = veg_num
+
+    def get_crop_amount_required(self):
+        return self.crop_amount_required
+    
+    def compare_crop_amount(self):
+        if self.crop_amount >= self.crop_amount_required:
+            return True
+        else:
+            return False
