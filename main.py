@@ -22,7 +22,6 @@ page_state = "menu"
 run = True
 game_timer = 0
 score = 0
-vegetables = ["carrot", "beet", "cauli", "onion"]
 
 # loading images
 background = pygame.image.load('./images/background.png')
@@ -84,7 +83,7 @@ onion_button_1 = button.Button(305, 720, onion.button, 1)
 onion_button_2 = button.Button(680, 720, onion.button, 1)
 onion_button_3 = button.Button(1055, 720, onion.button, 1)
 
-# create more instances
+# create challenge instance
 quest = Challenge([carrot, beet, cauli, onion])
 
 # timers
@@ -104,7 +103,7 @@ field_3 = Field(empty_field, [carrot, beet, cauli, onion])
 # more variables
 quest.gen_challenge()
 
-#
+# main game loop
 while run:
     screen.blit(background_scaled, (0, 0))
     
@@ -177,17 +176,14 @@ while run:
         if harvest_button_1.draw(screen):
             if field_1.get_growth_timer() >= 4:
                 field_1.harvest_crop()
-                print(f"{quest.check_challenge_status()}")
 
         if harvest_button_2.draw(screen):
             if field_2.get_growth_timer() >= 4:
                 field_2.harvest_crop()
-                print(f"{quest.check_challenge_status()}")
 
         if harvest_button_3.draw(screen):
             if field_3.get_growth_timer() >= 4:
                 field_3.harvest_crop()
-                print(f"{quest.check_challenge_status()}")
 
 # growth stages
         if not field_1.get_crops_harvested():

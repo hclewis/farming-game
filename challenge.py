@@ -35,4 +35,10 @@ class Challenge():
             challenge_complete = self.vegetables[index].compare_crop_amount()
             index += 1
 
+        if challenge_complete:
+            for vegetable in self.vegetables:
+                vegetable.reduce_crop_amount()
+        
+            self.gen_challenge()
+
         return challenge_complete

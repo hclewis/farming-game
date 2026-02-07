@@ -30,3 +30,7 @@ class Crop():
             return True
         else:
             return False
+        
+    def reduce_crop_amount(self):
+        self.crop_amount = self.crop_amount - self.crop_amount_required
+        self.crop_amount_required = 0
