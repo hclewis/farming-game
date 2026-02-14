@@ -180,22 +180,23 @@ while run:
                 field_3.grow_crop("onion")
 
 # harvest buttons
+
         if harvest_button_1.draw(screen):
-            if field_1.get_growth_timer() >= 4:
+            if field_1.get_growth_timer() > 2:
                 field_1.harvest_crop()
                 quest.check_challenge_status()
                 score = score + quest.current_score
                 quest.reset_current_score()
 
         if harvest_button_2.draw(screen):
-            if field_2.get_growth_timer() >= 4:
+            if field_2.get_growth_timer() > 2:
                 field_2.harvest_crop()
                 quest.check_challenge_status()
                 score = score + quest.current_score
                 quest.reset_current_score()
 
         if harvest_button_3.draw(screen):
-            if field_3.get_growth_timer() >= 4:
+            if field_3.get_growth_timer() > 2:
                 field_3.harvest_crop()
                 quest.check_challenge_status()
                 score = score + quest.current_score
@@ -203,21 +204,21 @@ while run:
 
 # growth stages
         if not field_1.get_crops_harvested():
-            if field_1.get_active_growth() and field_1.get_growth_timer() < 4:
+            if field_1.get_active_growth() and field_1.get_growth_timer() < 3:
                 screen.blit(field_1.get_crop_img_list()[int(field_1.get_growth_timer())], (75, 400))
             else:
                 field_1.set_active_growth(False)
                 screen.blit(field_1.get_crop_img_list()[3], (75, 400))
 
         if not field_2.get_crops_harvested():
-            if field_2.get_active_growth() and field_2.get_growth_timer() < 4:
+            if field_2.get_active_growth() and field_2.get_growth_timer() < 3:
                 screen.blit(field_2.get_crop_img_list()[int(field_2.get_growth_timer())], (450, 400))
             else:
                 field_2.set_active_growth(False)
                 screen.blit(field_2.get_crop_img_list()[3], (450, 400))
 
         if not field_3.get_crops_harvested():
-            if field_3.get_active_growth() and field_3.get_growth_timer() < 4:
+            if field_3.get_active_growth() and field_3.get_growth_timer() < 3:
                 screen.blit(field_3.get_crop_img_list()[int(field_3.get_growth_timer())], (825, 400))
             else:
                 field_3.set_active_growth(False)
