@@ -28,6 +28,7 @@ with open("scores.txt") as f:
 # loading images
 background = pygame.image.load('./images/background.png')
 title = pygame.image.load('./images/harvest-haven.png').convert_alpha()
+cog = pygame.image.load('./images/cog.png').convert_alpha()
 start = pygame.image.load("./images/buttons/start-button.png").convert_alpha()
 harvest = pygame.image.load("./images/buttons/harvest-button.png").convert_alpha()
 exit = pygame.image.load("./images/buttons/exit-button.png").convert_alpha()
@@ -63,6 +64,7 @@ onion_icon_image = pygame.image.load("./images/onion/onion-icon.png").convert_al
 # scale images
 background_scaled = pygame.transform.scale(background, (1200, 900))
 title_scaled = pygame.transform.scale(title, (777, 150))
+cog_scaled = pygame.transform.scale(cog, (70, 70))
 start_small = pygame.transform.scale(start, (200, 100))
 harvest_small = pygame.transform.scale(harvest, (300, 90))
 exit_scaled = pygame.transform.scale(exit, (180, 100))
@@ -80,6 +82,7 @@ start_game_button = button.Button(400, 200, start_small, 1)
 exit_button = button.Button(700, 200, exit_scaled, 1)
 menu_button = button.Button(500, 700, menu_scaled, 1)
 play_again_button = button.Button(500, 200, play_again_scaled, 1)
+settings_button = button.Button(1080, 50, cog_scaled, 1)
 
 harvest_button_1 = button.Button(75, 285, harvest_small, 1)
 harvest_button_2 = button.Button(450, 285, harvest_small, 1)
@@ -124,10 +127,16 @@ while run:
     
     if(page_state == "menu"):
         screen.blit(title_scaled, (211, 375))
+        draw_text("Hannah Lewis", font_1, text_colour_1, 75, 785)
+        if settings_button.draw(screen):
+            page_state = "settings"
         if start_game_button.draw(screen):
             page_state = "fields"
         if exit_button.draw(screen):
             run = False
+
+    if(page_state == "settings"):
+        screen.blit(background_scaled, (0, 0))
 
     if page_state == "end":
         screen.blit(background_scaled, (0, 0))
