@@ -22,6 +22,8 @@ page_state = "menu"
 run = True
 game_timer = 60
 score = 0
+with open("scores.txt") as f:
+    high_score = int(f.read())
 
 # loading images
 background = pygame.image.load('./images/background.png')
@@ -109,12 +111,13 @@ while run:
     
     if(page_state == "menu"):
         if start_game_button.draw(screen):
-            #
             page_state = "fields"
 
     if page_state == "end":
         screen.blit(background_scaled, (0, 0))
-        draw_text("end game", font_1, text_colour_1, 75, 50)
+        draw_text("end game", font_1, text_colour_1, 400, 50)
+        draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
+        draw_text(f"High score: {high_score}", font_1, text_colour_1, 75, 150)
 
     if(page_state == "fields"):
         screen.blit(field_1.empty_field, (75, 400))
@@ -226,6 +229,10 @@ while run:
 
         if game_timer == 0:
             page_state = "end"
+            if score > high_score:
+                high_score = score
+                with open("scores.txt", "w") as f:
+                    f.write(f"{high_score}")
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
