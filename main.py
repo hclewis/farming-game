@@ -24,6 +24,7 @@ game_timer = 15
 score = 0
 with open("scores.txt") as f:
     high_score = int(f.read())
+active_music = True
 bg_music = pygame.mixer.Sound("audio/background-music.mp3")
 bg_music.play(loops = -1)
 
@@ -31,6 +32,8 @@ bg_music.play(loops = -1)
 background = pygame.image.load('./images/background.png')
 title = pygame.image.load('./images/harvest-haven.png').convert_alpha()
 cog = pygame.image.load('./images/cog.png').convert_alpha()
+on = pygame.image.load("./images/buttons/on-button.png").convert_alpha()
+off = pygame.image.load("./images/buttons/off-button.png").convert_alpha()
 start = pygame.image.load("./images/buttons/start-button.png").convert_alpha()
 harvest = pygame.image.load("./images/buttons/harvest-button.png").convert_alpha()
 exit = pygame.image.load("./images/buttons/exit-button.png").convert_alpha()
@@ -67,6 +70,8 @@ onion_icon_image = pygame.image.load("./images/onion/onion-icon.png").convert_al
 background_scaled = pygame.transform.scale(background, (1200, 900))
 title_scaled = pygame.transform.scale(title, (777, 150))
 cog_scaled = pygame.transform.scale(cog, (70, 70))
+on_scaled = pygame.transform.scale(on, (140, 100))
+off_scaled = pygame.transform.scale(off, (140, 100))
 start_small = pygame.transform.scale(start, (200, 100))
 harvest_small = pygame.transform.scale(harvest, (300, 90))
 exit_scaled = pygame.transform.scale(exit, (180, 100))
@@ -85,6 +90,8 @@ exit_button = button.Button(700, 200, exit_scaled, 1)
 menu_button = button.Button(500, 700, menu_scaled, 1)
 play_again_button = button.Button(500, 200, play_again_scaled, 1)
 settings_button = button.Button(1080, 50, cog_scaled, 1)
+on_button = button.Button(700, 300, on_scaled, 1)
+off_button = button.Button(900, 300, off_scaled, 1)
 
 harvest_button_1 = button.Button(75, 285, harvest_small, 1)
 harvest_button_2 = button.Button(450, 285, harvest_small, 1)
@@ -139,6 +146,13 @@ while run:
 
     if(page_state == "settings"):
         screen.blit(background_scaled, (0, 0))
+        draw_text("music", font_1, text_colour_1, 400, 300)
+        if on_button.draw(screen):
+            bg_music.play(loops = -1)
+        if off_button.draw(screen):
+            bg_music.stop()
+        if menu_button.draw(screen):
+            page_state = "menu"
 
     if page_state == "end":
         screen.blit(background_scaled, (0, 0))
@@ -176,7 +190,10 @@ while run:
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
         draw_text(f"{quest.title}", font_1, text_colour_1, 400, 50)
         draw_text(f"{game_timer}", font_1, text_colour_1, 1075, 50)
-        draw_text(f"Record: {high_score}", font_1, text_colour_1, 75, 100)
+        if high_score > score:
+            draw_text(f"Record: {high_score}", font_1, text_colour_1, 75, 100)
+        if score > high_score:
+            draw_text(f"Record: {score}", font_1, text_colour_1, 75, 100)
 
 
 # carrot buttons
