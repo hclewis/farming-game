@@ -20,7 +20,7 @@ font_1 = pygame.font.SysFont("arialblack", 40)
 # game variables
 page_state = "menu"
 run = True
-game_timer = 60
+game_timer = 15
 score = 0
 with open("scores.txt") as f:
     high_score = int(f.read())
@@ -29,6 +29,9 @@ with open("scores.txt") as f:
 background = pygame.image.load('./images/background.png')
 start = pygame.image.load("./images/buttons/start-button.png").convert_alpha()
 harvest = pygame.image.load("./images/buttons/harvest-button.png").convert_alpha()
+exit = pygame.image.load("./images/buttons/exit-button.png").convert_alpha()
+menu = pygame.image.load("./images/buttons/menu-button.png").convert_alpha()
+play_again =pygame.image.load("./images/buttons/play-again-button.png").convert_alpha()
 empty_field = pygame.image.load("./images/empty-field.png").convert_alpha()
 seedy_field = pygame.image.load("./images/seedy-field.png").convert_alpha()
 # carrots
@@ -60,6 +63,9 @@ onion_icon_image = pygame.image.load("./images/onion/onion-icon.png").convert_al
 background_scaled = pygame.transform.scale(background, (1200, 900))
 start_small = pygame.transform.scale(start, (200, 100))
 harvest_small = pygame.transform.scale(harvest, (300, 90))
+exit_scaled = pygame.transform.scale(exit, (180, 100))
+menu_scaled = pygame.transform.scale(menu, (215, 100))
+play_again_scaled = pygame.transform.scale(play_again, (385, 100))
 
 # create crop instances
 carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3, carrot_button_image, carrot_icon_image, 20, 70, 3, 0.9)
@@ -69,9 +75,14 @@ onion = Crop("onion", seedy_field, onion_field_1, onion_field_2, onion_field_3, 
 
 # create button instances
 start_game_button = button.Button(500, 200, start_small, 1)
+exit_button = button.Button(500, 400, exit_scaled, 1)
+menu_button = button.Button(500, 700, menu_scaled, 1)
+play_again_button = button.Button(500, 200, play_again_scaled, 1)
+
 harvest_button_1 = button.Button(75, 285, harvest_small, 1)
 harvest_button_2 = button.Button(450, 285, harvest_small, 1)
 harvest_button_3 = button.Button(825, 285, harvest_small, 1)
+
 carrot_button_1 = button.Button(75, 720, carrot.button, 1)
 carrot_button_2 = button.Button(450, 720, carrot.button, 1)
 carrot_button_3 = button.Button(825, 720, carrot.button, 1)
@@ -112,14 +123,16 @@ while run:
     if(page_state == "menu"):
         if start_game_button.draw(screen):
             page_state = "fields"
+        if exit_button.draw(screen):
+            run = False
 
     if page_state == "end":
         screen.blit(background_scaled, (0, 0))
         draw_text("end game", font_1, text_colour_1, 400, 50)
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
         draw_text(f"High score: {high_score}", font_1, text_colour_1, 75, 150)
-        if start_game_button.draw(screen):
-            game_timer = 60
+        if play_again_button.draw(screen):
+            game_timer = 15
             score = 0
             carrot.reset_current_crop_amount()
             beet.reset_current_crop_amount()
@@ -129,6 +142,8 @@ while run:
             field_2.new_game()
             field_3.new_game()
             page_state = "fields"
+        if menu_button.draw(screen):
+            page_state = "menu"
 
     if(page_state == "fields"):
         screen.blit(field_1.empty_field, (75, 400))
