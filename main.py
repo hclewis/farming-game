@@ -27,6 +27,7 @@ with open("scores.txt") as f:
 
 # loading images
 background = pygame.image.load('./images/background.png')
+title = pygame.image.load('./images/harvest-haven.png').convert_alpha()
 start = pygame.image.load("./images/buttons/start-button.png").convert_alpha()
 harvest = pygame.image.load("./images/buttons/harvest-button.png").convert_alpha()
 exit = pygame.image.load("./images/buttons/exit-button.png").convert_alpha()
@@ -61,6 +62,7 @@ onion_icon_image = pygame.image.load("./images/onion/onion-icon.png").convert_al
 
 # scale images
 background_scaled = pygame.transform.scale(background, (1200, 900))
+title_scaled = pygame.transform.scale(title, (777, 150))
 start_small = pygame.transform.scale(start, (200, 100))
 harvest_small = pygame.transform.scale(harvest, (300, 90))
 exit_scaled = pygame.transform.scale(exit, (180, 100))
@@ -74,8 +76,8 @@ cauli = Crop("cauli", seedy_field, cauli_field_1, cauli_field_2, cauli_field_3, 
 onion = Crop("onion", seedy_field, onion_field_1, onion_field_2, onion_field_3, onion_button_image, onion_icon_image, 30, 70, 4, 0.9)
 
 # create button instances
-start_game_button = button.Button(500, 200, start_small, 1)
-exit_button = button.Button(500, 400, exit_scaled, 1)
+start_game_button = button.Button(400, 200, start_small, 1)
+exit_button = button.Button(700, 200, exit_scaled, 1)
 menu_button = button.Button(500, 700, menu_scaled, 1)
 play_again_button = button.Button(500, 200, play_again_scaled, 1)
 
@@ -121,6 +123,7 @@ while run:
     screen.blit(background_scaled, (0, 0))
     
     if(page_state == "menu"):
+        screen.blit(title_scaled, (211, 375))
         if start_game_button.draw(screen):
             page_state = "fields"
         if exit_button.draw(screen):
@@ -161,7 +164,8 @@ while run:
 
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
         draw_text(f"{quest.title}", font_1, text_colour_1, 400, 50)
-        draw_text(f"{game_timer}", font_1, text_colour_1, 1000, 50)
+        draw_text(f"{game_timer}", font_1, text_colour_1, 1075, 50)
+        draw_text(f"Record: {high_score}", font_1, text_colour_1, 75, 100)
 
 
 # carrot buttons
