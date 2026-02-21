@@ -24,6 +24,8 @@ game_timer = 15
 score = 0
 with open("scores.txt") as f:
     high_score = int(f.read())
+bg_music = pygame.mixer.Sound("audio/background-music.mp3")
+bg_music.play(loops = -1)
 
 # loading images
 background = pygame.image.load('./images/background.png')
