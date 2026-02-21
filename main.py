@@ -16,6 +16,7 @@ text_colour_1 = (255,255,255)
 
 # fonts
 font_1 = pygame.font.SysFont("arialblack", 40)
+font_2 = pygame.font.SysFont("arialblack", 60)
 
 # game variables
 page_state = "menu"
@@ -146,7 +147,7 @@ while run:
 
     if(page_state == "settings"):
         screen.blit(background_scaled, (0, 0))
-        draw_text("music", font_1, text_colour_1, 400, 300)
+        draw_text("music", font_2, text_colour_1, 400, 300)
         if on_button.draw(screen):
             bg_music.play(loops = -1)
         if off_button.draw(screen):
