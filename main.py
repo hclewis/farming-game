@@ -118,6 +118,14 @@ while run:
         draw_text("end game", font_1, text_colour_1, 400, 50)
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
         draw_text(f"High score: {high_score}", font_1, text_colour_1, 75, 150)
+        if start_game_button.draw(screen):
+            game_timer = 60
+            score = 0
+            carrot.reset_current_crop_amount()
+            beet.reset_current_crop_amount()
+            cauli.reset_current_crop_amount()
+            onion.reset_current_crop_amount()
+            page_state = "fields"
 
     if(page_state == "fields"):
         screen.blit(field_1.empty_field, (75, 400))

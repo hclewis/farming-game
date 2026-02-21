@@ -41,3 +41,6 @@ class Crop():
 
     def get_crop_score(self):
         return self.value * self.crop_amount_required
+
+    def reset_current_crop_amount(self):
+        self.crop_amount = 0
