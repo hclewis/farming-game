@@ -125,6 +125,9 @@ while run:
             beet.reset_current_crop_amount()
             cauli.reset_current_crop_amount()
             onion.reset_current_crop_amount()
+            field_1.new_game()
+            field_2.new_game()
+            field_3.new_game()
             page_state = "fields"
 
     if(page_state == "fields"):

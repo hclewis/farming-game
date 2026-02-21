@@ -60,3 +60,9 @@ class Field():
         self.set_active_growth(False)
         self.reset_growth_timer()
         self.increment_current_crop()
+
+    def new_game(self):
+        self.set_crops_harvested(True)
+        self.set_active_growth(False)
+        self.reset_growth_timer()
+        
