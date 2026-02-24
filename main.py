@@ -37,6 +37,7 @@ on = pygame.image.load("./images/buttons/on-button.png").convert_alpha()
 off = pygame.image.load("./images/buttons/off-button.png").convert_alpha()
 start = pygame.image.load("./images/buttons/start-button.png").convert_alpha()
 harvest = pygame.image.load("./images/buttons/harvest-button.png").convert_alpha()
+spade = pygame.image.load("./images/outlined/spade-outlined.png").convert_alpha()
 exit = pygame.image.load("./images/buttons/exit-button.png").convert_alpha()
 menu = pygame.image.load("./images/buttons/menu-button.png").convert_alpha()
 play_again =pygame.image.load("./images/buttons/play-again-button.png").convert_alpha()
@@ -48,24 +49,28 @@ carrot_field_2 = pygame.image.load("./images/carrot/carrot-field-2.png").convert
 carrot_field_3 = pygame.image.load("./images/carrot/carrot-field-3.png").convert_alpha()
 carrot_button_image = pygame.image.load("./images/carrot/carrot-button.png").convert_alpha()
 carrot_icon_image = pygame.image.load("./images/carrot/carrot-icon.png").convert_alpha()
+carrot_outlined = pygame.image.load("./images/outlined/carrot-outlined.png").convert_alpha()
 # beetroots
 beet_field_1 = pygame.image.load("./images/beet/beet-field-1.png").convert_alpha()
 beet_field_2 = pygame.image.load("./images/beet/beet-field-2.png").convert_alpha()
 beet_field_3 = pygame.image.load("./images/beet/beet-field-3.png").convert_alpha()
 beet_button_image = pygame.image.load("./images/beet/beet-button.png").convert_alpha()
 beet_icon_image = pygame.image.load("./images/beet/beet-icon.png").convert_alpha()
+beet_outlined = pygame.image.load("./images/outlined/beet-outlined.png").convert_alpha()
 # cauliflowers
 cauli_field_1 = pygame.image.load("./images/cauli/cauli-field-1.png").convert_alpha()
 cauli_field_2 = pygame.image.load("./images/cauli/cauli-field-2.png").convert_alpha()
 cauli_field_3 = pygame.image.load("./images/cauli/cauli-field-3.png").convert_alpha()
 cauli_button_image = pygame.image.load("./images/cauli/cauli-button.png").convert_alpha()
 cauli_icon_image = pygame.image.load("./images/cauli/cauli-icon.png").convert_alpha()
+cauli_outlined = pygame.image.load("./images/outlined/cauli-outlined.png").convert_alpha()
 # onions
 onion_field_1 = pygame.image.load("./images/onion/onion-field-1.png").convert_alpha()
 onion_field_2 = pygame.image.load("./images/onion/onion-field-2.png").convert_alpha()
 onion_field_3 = pygame.image.load("./images/onion/onion-field-3.png").convert_alpha()
 onion_button_image = pygame.image.load("./images/onion/onion-button.png").convert_alpha()
 onion_icon_image = pygame.image.load("./images/onion/onion-icon.png").convert_alpha()
+onion_outlined = pygame.image.load("./images/outlined/onion-outlined.png").convert_alpha()
 
 # scale images
 background_scaled = pygame.transform.scale(background, (1200, 900))
@@ -78,12 +83,13 @@ harvest_small = pygame.transform.scale(harvest, (300, 90))
 exit_scaled = pygame.transform.scale(exit, (180, 100))
 menu_scaled = pygame.transform.scale(menu, (215, 100))
 play_again_scaled = pygame.transform.scale(play_again, (385, 100))
+spade_scaled = pygame.transform.scale(spade, (80, 80))
 
 # create crop instances
-carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3, carrot_button_image, carrot_icon_image, 20, 70, 3, 0.9)
-beet = Crop("beet", seedy_field, beet_field_1, beet_field_2, beet_field_3, beet_button_image, beet_icon_image, 40, 70, 5, 0.9)
-cauli = Crop("cauli", seedy_field, cauli_field_1, cauli_field_2, cauli_field_3, cauli_button_image, cauli_icon_image, 60, 45, 6, 0.9)
-onion = Crop("onion", seedy_field, onion_field_1, onion_field_2, onion_field_3, onion_button_image, onion_icon_image, 30, 70, 4, 0.9)
+carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3, carrot_outlined, carrot_icon_image, 20, 70, 3, 0.9)
+beet = Crop("beet", seedy_field, beet_field_1, beet_field_2, beet_field_3, beet_outlined, beet_icon_image, 40, 70, 5, 0.9)
+cauli = Crop("cauli", seedy_field, cauli_field_1, cauli_field_2, cauli_field_3, cauli_outlined, cauli_icon_image, 60, 45, 6, 0.9)
+onion = Crop("onion", seedy_field, onion_field_1, onion_field_2, onion_field_3, onion_outlined, onion_icon_image, 30, 70, 4, 0.9)
 
 # create button instances
 start_game_button = button.Button(400, 200, start_small, 1)
@@ -94,22 +100,22 @@ settings_button = button.Button(1080, 50, cog_scaled, 1)
 on_button = button.Button(700, 300, on_scaled, 1)
 off_button = button.Button(900, 300, off_scaled, 1)
 
-harvest_button_1 = button.Button(75, 285, harvest_small, 1)
-harvest_button_2 = button.Button(450, 285, harvest_small, 1)
-harvest_button_3 = button.Button(825, 285, harvest_small, 1)
+harvest_button_1 = button.Button(294, 686, spade_scaled, 1)
+harvest_button_2 = button.Button(686, 686, spade_scaled, 1)
+harvest_button_3 = button.Button(1042, 686, spade_scaled, 1)
 
-carrot_button_1 = button.Button(75, 720, carrot.button, 1)
-carrot_button_2 = button.Button(450, 720, carrot.button, 1)
-carrot_button_3 = button.Button(825, 720, carrot.button, 1)
-beet_button_1 = button.Button(152, 720, beet.button, 1)
-beet_button_2 = button.Button(526, 720, beet.button, 1)
-beet_button_3 = button.Button(901, 720, beet.button, 1)
-cauli_button_1 = button.Button(229, 720, cauli.button, 1)
-cauli_button_2 = button.Button(603, 720, cauli.button, 1)
-cauli_button_3 = button.Button(978, 720, cauli.button, 1)
-onion_button_1 = button.Button(305, 720, onion.button, 1)
-onion_button_2 = button.Button(680, 720, onion.button, 1)
-onion_button_3 = button.Button(1055, 720, onion.button, 1)
+carrot_button_1 = button.Button(76, 370, carrot.button, 1)
+carrot_button_2 = button.Button(450, 370, carrot.button, 1)
+carrot_button_3 = button.Button(824, 370, carrot.button, 1)
+beet_button_1 = button.Button(150, 370, beet.button, 1)
+beet_button_2 = button.Button(525, 370, beet.button, 1)
+beet_button_3 = button.Button(898, 370, beet.button, 1)
+cauli_button_1 = button.Button(229, 370, cauli.button, 1)
+cauli_button_2 = button.Button(603, 370, cauli.button, 1)
+cauli_button_3 = button.Button(977, 370, cauli.button, 1)
+onion_button_1 = button.Button(305, 370, onion.button, 1)
+onion_button_2 = button.Button(679, 370, onion.button, 1)
+onion_button_3 = button.Button(1053, 370, onion.button, 1)
 
 # create challenge instance
 quest = Challenge([carrot, beet, cauli, onion])
@@ -175,9 +181,9 @@ while run:
             page_state = "menu"
 
     if(page_state == "fields"):
-        screen.blit(field_1.empty_field, (75, 400))
-        screen.blit(field_2.empty_field, (450, 400))
-        screen.blit(field_3.empty_field, (825, 400))
+        screen.blit(field_1.empty_field, (75, 467))
+        screen.blit(field_2.empty_field, (450, 467))
+        screen.blit(field_3.empty_field, (825, 467))
 
         screen.blit(carrot.icon, (75, 808))
         draw_text(f"{carrot.get_crop_amount()}", font_1, text_colour_1, 150, 820)
@@ -267,24 +273,24 @@ while run:
 # growth stages
         if not field_1.get_crops_harvested():
             if field_1.get_active_growth() and field_1.get_growth_timer() < 3:
-                screen.blit(field_1.get_crop_img_list()[int(field_1.get_growth_timer())], (75, 400))
+                screen.blit(field_1.get_crop_img_list()[int(field_1.get_growth_timer())], (75, 467))
             else:
                 field_1.set_active_growth(False)
-                screen.blit(field_1.get_crop_img_list()[3], (75, 400))
+                screen.blit(field_1.get_crop_img_list()[3], (75, 467))
 
         if not field_2.get_crops_harvested():
             if field_2.get_active_growth() and field_2.get_growth_timer() < 3:
-                screen.blit(field_2.get_crop_img_list()[int(field_2.get_growth_timer())], (450, 400))
+                screen.blit(field_2.get_crop_img_list()[int(field_2.get_growth_timer())], (450, 467))
             else:
                 field_2.set_active_growth(False)
-                screen.blit(field_2.get_crop_img_list()[3], (450, 400))
+                screen.blit(field_2.get_crop_img_list()[3], (450, 467))
 
         if not field_3.get_crops_harvested():
             if field_3.get_active_growth() and field_3.get_growth_timer() < 3:
-                screen.blit(field_3.get_crop_img_list()[int(field_3.get_growth_timer())], (825, 400))
+                screen.blit(field_3.get_crop_img_list()[int(field_3.get_growth_timer())], (825, 467))
             else:
                 field_3.set_active_growth(False)
-                screen.blit(field_3.get_crop_img_list()[3], (825, 400))
+                screen.blit(field_3.get_crop_img_list()[3], (825, 467))
 
         if game_timer == 0:
             page_state = "end"
