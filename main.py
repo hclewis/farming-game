@@ -18,6 +18,7 @@ text_colour_2 = (101,145,155)
 # fonts
 font_1 = pygame.font.SysFont("arialblack", 40)
 font_2 = pygame.font.SysFont("arialblack", 60)
+font_3 = pygame.font.SysFont("arialblack", 15)
 
 # game variables
 page_state = "menu"
@@ -157,6 +158,9 @@ while run:
     if(page_state == "settings"):
         screen.blit(background_scaled, (0, 0))
         draw_text("music", font_2, text_colour_1, 400, 300)
+        draw_text("'Wholesome' Kevin MacLeod (incompetech.com)", font_3, text_colour_1, 50, 770)
+        draw_text("Licensed under Creative Commons: By Attribution 4.0 License", font_3, text_colour_1, 50, 800)
+        draw_text("http://creativecommons.org/licenses/by/4.0/", font_3, text_colour_1, 50, 830)
         if on_button.draw(screen):
             bg_music.play(loops = -1)
         if off_button.draw(screen):
