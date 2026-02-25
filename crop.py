@@ -5,10 +5,10 @@ class Crop():
         self.name = name
         self.crop_amount = 0
         self.crop_amount_required = 0
-        self.seedy_field = pygame.transform.scale(seedy_field, (300,300))
-        self.field_1 = pygame.transform.scale(field_1, (300,300))
-        self.field_2 = pygame.transform.scale(field_2, (300,300))
-        self.field_3 = pygame.transform.scale(field_3, (300,300))
+        self.seedy_field = pygame.transform.scale(seedy_field, (350,350))
+        self.field_1 = pygame.transform.scale(field_1, (350,350))
+        self.field_2 = pygame.transform.scale(field_2, (350,350))
+        self.field_3 = pygame.transform.scale(field_3, (350,350))
         self.button = pygame.transform.scale(button, (70,70))
         self.icon = pygame.transform.scale(icon, (icon_width,icon_height))
         self.seedling_list = [self.seedy_field, self.field_1, self.field_2, self.field_3]

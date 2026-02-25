@@ -2,7 +2,7 @@ import pygame
 
 class Field():
     def __init__(self, empty_field, vegetables):
-        self.empty_field = pygame.transform.scale(empty_field, (300, 300))
+        self.empty_field = pygame.transform.scale(empty_field, (350, 350))
         self.crops_harvested = True
         self.growth_timer = 0
         self.active_growth = False
