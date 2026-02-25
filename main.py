@@ -165,7 +165,7 @@ while run:
 
     if page_state == "end":
         screen.blit(background_scaled, (0, 0))
-        draw_text("end game", font_1, text_colour_1, 400, 50)
+        draw_text("end game", font_1, text_colour_1, 500, 50)
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
         draw_text(f"High score: {high_score}", font_1, text_colour_1, 75, 100)
         if play_again_button.draw(screen):
