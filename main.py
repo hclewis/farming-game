@@ -9,7 +9,7 @@ pygame.init()
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 900
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Farming Game")
+pygame.display.set_caption("Harvest Haven")
 
 # colours
 text_colour_1 = (255,255,255)
@@ -28,6 +28,7 @@ with open("scores.txt") as f:
     high_score = int(f.read())
 active_music = True
 bg_music = pygame.mixer.Sound("audio/background-music.mp3")
+bg_music.play(loops = -1)
 
 # loading images
 background = pygame.image.load('./images/background.png')
