@@ -39,6 +39,10 @@ gameover = pygame.image.load('./images/game-over.png').convert_alpha()
 instructions = pygame.image.load('./images/instructions.png').convert_alpha()
 inventory = pygame.image.load('./images/inventory-base.png').convert_alpha()
 music = pygame.image.load('./images/music.png').convert_alpha()
+score_base = pygame.image.load('./images/score-base.png').convert_alpha()
+record_base = pygame.image.load('./images/record-base.png').convert_alpha()
+top_score_base = pygame.image.load('./images/top-score-base.png').convert_alpha()
+timer_base = pygame.image.load('./images/timer-base.png').convert_alpha()
 cog = pygame.image.load('./images/cog.png').convert_alpha()
 on = pygame.image.load("./images/buttons/on-button.png").convert_alpha()
 off = pygame.image.load("./images/buttons/off-button.png").convert_alpha()
@@ -99,6 +103,10 @@ menu_scaled = pygame.transform.scale(menu, (308, 143))
 play_again_scaled = pygame.transform.scale(play_again, (693, 180))
 spade_scaled = pygame.transform.scale(spade, (70, 70))
 inventory_scaled = pygame.transform.scale(inventory, (1126, 98))
+score_base_scaled = pygame.transform.scale(score_base, (299, 80))
+record_base_scaled = pygame.transform.scale(record_base, (299, 80))
+top_score_base_scaled = pygame.transform.scale(top_score_base, (772, 144))
+timer_base_scaled = pygame.transform.scale(timer_base, (100, 80))
 
 # create crop instances
 carrot = Crop("carrot", seedy_field, carrot_field_1, carrot_field_2, carrot_field_3, carrot_outlined, carrot_icon_image, 20, 70, 3, 0.9)
@@ -159,7 +167,8 @@ while run:
     
     if(page_state == "menu"):
         screen.blit(title_scaled, (47, 253))
-        draw_text("Hannah Lewis", font_1, text_colour_1, 450, 785)
+        screen.blit(top_score_base_scaled, (214, 719))
+        draw_text(f"{high_score}", font_2, text_colour_2, 829, 747)        
         if settings_button.draw(screen):
             page_state = "settings"
         if start_game_button.draw(screen):
@@ -197,8 +206,10 @@ while run:
     if page_state == "end":
         screen.blit(background_scaled, (0, 0))
         screen.blit(gameover_scaled, (187, 253))
-        draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
-        draw_text(f"High score: {high_score}", font_1, text_colour_1, 75, 100)
+        screen.blit(score_base_scaled, (37, 37))
+        screen.blit(record_base_scaled, (37, 132))
+        draw_text(f"{score}", font_1, text_colour_2, 242, 47)
+        draw_text(f"{high_score}", font_1, text_colour_2, 242, 142)
         if play_again_button.draw(screen):
             game_timer = 60
             score = 0
@@ -218,7 +229,10 @@ while run:
         screen.blit(field_2.empty_field, (425, 378))
         screen.blit(field_3.empty_field, (813, 378))
 
+        screen.blit(score_base_scaled, (37, 37))
+        screen.blit(record_base_scaled, (37, 132))
         screen.blit(inventory_scaled, (37, 765))
+        screen.blit(timer_base_scaled, (1062, 37))
 
         #screen.blit(carrot.icon, (75, 808))
         draw_text(f"{carrot.get_crop_amount()}", font_1, text_colour_2, 134, 784)
@@ -229,13 +243,13 @@ while run:
         #screen.blit(onion.icon, (825, 808))
         draw_text(f"{onion.get_crop_amount()}", font_1, text_colour_2, 977, 784)
 
-        draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
+        draw_text(f"{score}", font_1, text_colour_2, 242, 47)
         draw_text(f"{quest.title}", font_1, text_colour_1, 400, 50)
-        draw_text(f"{game_timer}", font_1, text_colour_1, 1075, 50)
+        draw_text(f"{game_timer}", font_1, text_colour_2, 1085, 47)
         if high_score > score:
-            draw_text(f"Record: {high_score}", font_1, text_colour_1, 75, 100)
+            draw_text(f"{high_score}", font_1, text_colour_2, 242, 142)
         if score > high_score:
-            draw_text(f"Record: {score}", font_1, text_colour_1, 75, 100)
+            draw_text(f"{score}", font_1, text_colour_2, 242, 142)
 
 
 # carrot buttons
