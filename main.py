@@ -19,6 +19,7 @@ text_colour_2 = (101,145,155)
 font_1 = pygame.font.SysFont("arialblack", 40)
 font_2 = pygame.font.SysFont("arialblack", 60)
 font_3 = pygame.font.SysFont("arialblack", 15)
+font_4 = pygame.font.SysFont("arialblack", 25)
 
 # game variables
 page_state = "menu"
@@ -34,7 +35,10 @@ bg_music.play(loops = -1)
 # loading images
 background = pygame.image.load('./images/background.png')
 title = pygame.image.load('./images/harvest-haven.png').convert_alpha()
+gameover = pygame.image.load('./images/game-over.png').convert_alpha()
+instructions = pygame.image.load('./images/instructions.png').convert_alpha()
 inventory = pygame.image.load('./images/inventory-base.png').convert_alpha()
+music = pygame.image.load('./images/music.png').convert_alpha()
 cog = pygame.image.load('./images/cog.png').convert_alpha()
 on = pygame.image.load("./images/buttons/on-button.png").convert_alpha()
 off = pygame.image.load("./images/buttons/off-button.png").convert_alpha()
@@ -43,6 +47,8 @@ harvest = pygame.image.load("./images/buttons/harvest-button.png").convert_alpha
 spade = pygame.image.load("./images/outlined/spade-outlined.png").convert_alpha()
 exit = pygame.image.load("./images/buttons/exit-button.png").convert_alpha()
 menu = pygame.image.load("./images/buttons/menu-button.png").convert_alpha()
+x_button = pygame.image.load("./images/buttons/x-button.png").convert_alpha()
+question = pygame.image.load("./images/buttons/question-mark.png").convert_alpha()
 play_again =pygame.image.load("./images/buttons/play-again-button.png").convert_alpha()
 empty_field = pygame.image.load("./images/empty-field.png").convert_alpha()
 seedy_field = pygame.image.load("./images/seedy-field.png").convert_alpha()
@@ -77,15 +83,20 @@ onion_outlined = pygame.image.load("./images/outlined/onion-outlined.png").conve
 
 # scale images
 background_scaled = pygame.transform.scale(background, (1200, 900))
-title_scaled = pygame.transform.scale(title, (777, 150))
+question_scaled = pygame.transform.scale(question, (44, 70))
+x_button_scaled = pygame.transform.scale(x_button, (83, 94))
+gameover_scaled = pygame.transform.scale(gameover, (824, 213))
+instructions_scaled = pygame.transform.scale(instructions, (850, 180))
+music_scaled = pygame.transform.scale(music, (402, 180))
+title_scaled = pygame.transform.scale(title, (1100, 213))
 cog_scaled = pygame.transform.scale(cog, (70, 70))
-on_scaled = pygame.transform.scale(on, (140, 100))
-off_scaled = pygame.transform.scale(off, (140, 100))
-start_small = pygame.transform.scale(start, (200, 100))
+on_scaled = pygame.transform.scale(on, (200, 143))
+off_scaled = pygame.transform.scale(off, (200, 143))
+start_small = pygame.transform.scale(start, (376, 180))
 harvest_small = pygame.transform.scale(harvest, (300, 90))
-exit_scaled = pygame.transform.scale(exit, (180, 100))
-menu_scaled = pygame.transform.scale(menu, (215, 100))
-play_again_scaled = pygame.transform.scale(play_again, (385, 100))
+exit_scaled = pygame.transform.scale(x_button_scaled, (83, 94))
+menu_scaled = pygame.transform.scale(menu, (308, 143))
+play_again_scaled = pygame.transform.scale(play_again, (693, 180))
 spade_scaled = pygame.transform.scale(spade, (70, 70))
 inventory_scaled = pygame.transform.scale(inventory, (1126, 98))
 
@@ -96,13 +107,14 @@ cauli = Crop("cauli", seedy_field, cauli_field_1, cauli_field_2, cauli_field_3, 
 onion = Crop("onion", seedy_field, onion_field_1, onion_field_2, onion_field_3, onion_outlined, onion_icon_image, 30, 70, 4, 0.9)
 
 # create button instances
-start_game_button = button.Button(400, 200, start_small, 1)
-exit_button = button.Button(700, 200, exit_scaled, 1)
-menu_button = button.Button(500, 700, menu_scaled, 1)
-play_again_button = button.Button(500, 200, play_again_scaled, 1)
-settings_button = button.Button(1080, 50, cog_scaled, 1)
-on_button = button.Button(700, 300, on_scaled, 1)
-off_button = button.Button(900, 300, off_scaled, 1)
+start_game_button = button.Button(411, 503, start_small, 1)
+exit_button = button.Button(37, 770, exit_scaled, 1)
+menu_button = button.Button(443, 720, menu_scaled, 1)
+play_again_button = button.Button(253, 503, play_again_scaled, 1)
+settings_button = button.Button(1093, 36, cog_scaled, 1)
+instructions_button = button.Button(40, 36, question_scaled, 1)
+on_button = button.Button(380, 253, on_scaled, 1)
+off_button = button.Button(617, 253, off_scaled, 1)
 
 harvest_button_1 = button.Button(317, 280, spade_scaled, 1)
 harvest_button_2 = button.Button(704, 280, spade_scaled, 1)
@@ -146,31 +158,45 @@ while run:
     screen.blit(background_scaled, (0, 0))
     
     if(page_state == "menu"):
-        screen.blit(title_scaled, (211, 375))
-        draw_text("Hannah Lewis", font_1, text_colour_1, 75, 785)
+        screen.blit(title_scaled, (47, 253))
+        draw_text("Hannah Lewis", font_1, text_colour_1, 450, 785)
         if settings_button.draw(screen):
             page_state = "settings"
         if start_game_button.draw(screen):
             page_state = "fields"
         if exit_button.draw(screen):
             run = False
+        if instructions_button.draw(screen):
+            page_state = "instructions"
 
     if(page_state == "settings"):
         screen.blit(background_scaled, (0, 0))
-        draw_text("music", font_2, text_colour_1, 400, 300)
-        draw_text("'Wholesome' Kevin MacLeod (incompetech.com)", font_3, text_colour_1, 50, 770)
-        draw_text("Licensed under Creative Commons: By Attribution 4.0 License", font_3, text_colour_1, 50, 800)
-        draw_text("http://creativecommons.org/licenses/by/4.0/", font_3, text_colour_1, 50, 830)
+        screen.blit(music_scaled, (398, 36))
+        draw_text("'Wholesome' Kevin MacLeod (incompetech.com)", font_3, text_colour_1, 380, 462)
+        draw_text("Licensed under Creative Commons: By Attribution 4.0 License", font_3, text_colour_1, 380, 492)
+        draw_text("http://creativecommons.org/licenses/by/4.0/", font_3, text_colour_1, 380, 522)
         if on_button.draw(screen):
             bg_music.play(loops = -1)
         if off_button.draw(screen):
             bg_music.stop()
         if menu_button.draw(screen):
             page_state = "menu"
+    
+    if(page_state == "instructions"):
+        screen.blit(background_scaled, (0, 0))
+        screen.blit(instructions_scaled, (172, 36))
+        draw_text("1. To start the game, click the 'Start' button.", font_4, text_colour_1, 50, 260)
+        draw_text("2. Check the challenge at the top of the screen and the crops it requires.", font_4, text_colour_1, 50, 300)
+        draw_text("3. Plant these crops by clicking the icon of the crop required for the quest.", font_4, text_colour_1, 50, 340)
+        draw_text("4. Harvest the crops once fully grown by clicking on the spade icon.", font_4, text_colour_1, 50, 380)
+        draw_text("5. Continue until the quest is fulfilled.", font_4, text_colour_1, 50, 420)
+        draw_text("6. Check what the new quest requires, and repeat!", font_4, text_colour_1, 50, 460)
+        if menu_button.draw(screen):
+            page_state = "menu"
 
     if page_state == "end":
         screen.blit(background_scaled, (0, 0))
-        draw_text("end game", font_1, text_colour_1, 500, 50)
+        screen.blit(gameover_scaled, (187, 253))
         draw_text(f"Score: {score}", font_1, text_colour_1, 75, 50)
         draw_text(f"High score: {high_score}", font_1, text_colour_1, 75, 100)
         if play_again_button.draw(screen):
